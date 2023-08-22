@@ -9,6 +9,7 @@ const cookies = require('cookie-parser');
 
 const { errors } = require('celebrate');
 const cors = require('cors');
+const limiter = require('./middlewares/rateLimit');
 const { routes } = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
@@ -22,7 +23,11 @@ mongoose.connect(DB_ADDRESS, {
   useNewUrlParser: true,
   useUnifiedTopology: false,
 });
+
+app.use(limiter);
+
 app.use(helmet());
+
 // Middleware объединение пакетов bodynm
 app.use(express.json());
 

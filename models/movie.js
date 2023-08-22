@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const validator = require('validator');
 const User = require('./user');
 
 const cardSchema = new mongoose.Schema({
@@ -27,15 +27,27 @@ const cardSchema = new mongoose.Schema({
   image: {
     type: String,
     required: true,
+    validate: {
+      validator: (email) => validator.isURL(email),
+      message: 'Некорректный формат ссылки',
+    },
   },
 
   trailerLink: {
     type: String,
     required: true,
+    validate: {
+      validator: (email) => validator.isURL(email),
+      message: 'Некорректный формат ссылки',
+    },
   },
   thumbnail: {
     type: String,
     required: true,
+    validate: {
+      validator: (email) => validator.isURL(email),
+      message: 'Некорректный формат ссылки',
+    },
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,

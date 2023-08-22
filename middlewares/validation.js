@@ -47,7 +47,7 @@ const ValidationCreateMovie = celebrate({
 // Валидация удаления фильма по ID +
 const ValidationDeleteMovie = celebrate({
   params: Joi.object().keys({
-    movieId: Joi.string().length(24).required(),
+    movieId: Joi.string().hex().length(24).required(),
   }),
 });
 
@@ -55,7 +55,6 @@ module.exports = {
   ValidationСreateUser,
   ValidationLogin,
   ValidationUpdateUserProfile,
-
   ValidationCreateMovie,
   ValidationDeleteMovie,
 };

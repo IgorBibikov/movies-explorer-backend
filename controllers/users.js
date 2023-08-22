@@ -1,7 +1,7 @@
 const http2 = require('node:http2');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const NotFoundErr = require('../errors/NotFoundErr');
+
 const BadRequestErr = require('../errors/BadRequestErr');
 const ConflictErr = require('../errors/ConflictErr');
 
@@ -71,11 +71,7 @@ function updateUserProfile(req, res, next) {
     { runValidators: true, new: true },
   )
     .then((user) => {
-      if (!req.user._id) {
-        next(new NotFoundErr('Пользователь c указанным _id не найден.'));
-      } else {
-        res.status(HTTP_STATUS_OK).send({ data: user });
-      }
+      res.status(HTTP_STATUS_OK).send({ data: user });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -109,13 +105,8 @@ function login(req, res, next) {
 }
 
 // Логаут УДАЛЕНИЕ КУКИ +
-function logout(req, res, next) {
-  res
-    .clearCookie('jwt')
-    .send({ message: 'Cookie has been deleted' })
-    .catch((err) => {
-      next(err);
-    });
+function logout(req, res) {
+  res.clearCookie('jwt').send({ message: 'Cookie has been deleted' });
 }
 module.exports = {
   getCurrentUser,

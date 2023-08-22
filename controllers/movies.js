@@ -9,7 +9,7 @@ const Movie = require('../models/movie');
 
 // Получение всех фильмов +
 function getMovies(req, res, next) {
-  return Movie.find({})
+  return Movie.find({ owner: req.user._id })
     .then((movies) => res.status(HTTP_STATUS_OK).send(movies))
     .catch((err) => {
       next(err);
