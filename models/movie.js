@@ -28,7 +28,7 @@ const cardSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (email) => validator.isURL(email),
+      validator: (url) => validator.isURL(url),
       message: 'Некорректный формат ссылки',
     },
   },
@@ -37,7 +37,7 @@ const cardSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (email) => validator.isURL(email),
+      validator: (url) => validator.isURL(url),
       message: 'Некорректный формат ссылки',
     },
   },
@@ -45,7 +45,7 @@ const cardSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (email) => validator.isURL(email),
+      validator: (url) => validator.isURL(url),
       message: 'Некорректный формат ссылки',
     },
   },
